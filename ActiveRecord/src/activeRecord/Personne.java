@@ -100,7 +100,7 @@ public class Personne {
         return personnes;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -115,6 +115,6 @@ public class Personne {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Integer.hashCode(id);
     }
 }
