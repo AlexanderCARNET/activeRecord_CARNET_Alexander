@@ -46,4 +46,14 @@ class TestPersonne {
         assertNull(p);
     }
 
+    @Test
+    public void test_findByName() throws SQLException {
+        Personne p1 = new Personne("Spielberg","Steven");
+        p1.setId(1);
+
+        HashSet<Personne> personnes = Personne.findByName("Spielberg");
+        assertEquals(1,personnes.size(), "Pas le bon nombre de personnes");
+        assertTrue(personnes.contains(p1));
+    }
+
 }
