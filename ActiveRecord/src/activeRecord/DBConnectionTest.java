@@ -1,26 +1,16 @@
 package activeRecord;
 
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
-class PrincipaleJDBCTest {
-
-    @BeforeEach
-    void setUp(){
-
-    }
-
-    @AfterEach
-    void tearDown(){
-
-    }
+class DBConnectionTest {
 
     @Test
+    /**
+     * test que le Singleton retourne toujours le meme objet Connection
+     */
     public void test_creation_unique_connexion(){
         //recuperation de différentes instances de Connection
         DBConnection instance = DBConnection.getInstance();
@@ -33,5 +23,16 @@ class PrincipaleJDBCTest {
         //test que les connexions sont bien les memes
         assertEquals(connection1,connection2);
         assertEquals(connection1,connection3);
+
+    }
+
+    @Test
+    /**
+     * test que l'objet connection donné par DBConnection est du type java.sql.Connection
+     */
+    public void test_bon_type_Connection(){
+        DBConnection instance = DBConnection.getInstance();
+        Connection connection = instance.getConnexion();
+        assertInstanceOf(java.sql.Connection.class,connection);
     }
 }
