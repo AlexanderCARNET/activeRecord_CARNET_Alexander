@@ -21,6 +21,29 @@ public class DBConnection {
         this.serverName = "localhost";
         this.portNumber = "3306";
 
+        this.creerConnexion();
+
+        DBConnection.dbConnection = this;
+    }
+
+    public static synchronized DBConnection getInstance(){
+        if(DBConnection.dbConnection == null){
+            return new DBConnection();
+        }
+        return DBConnection.dbConnection;
+    }
+
+    public Connection getConnexion(){
+        return this.connection;
+    }
+
+    public void setNomDB(String nomDB){
+        this.dbName = nomDB;
+        this.creerConnexion();
+
+    }
+
+    private void creerConnexion(){
         try{
             //creation de la connection
             // chargement du driver jdbc
@@ -44,21 +67,6 @@ public class DBConnection {
             System.out.println("*** ERREUR inconnue... ***");
             e.printStackTrace();
         }
-
-
-        DBConnection.dbConnection = this;
     }
-
-    public static synchronized DBConnection getInstance(){
-        if(DBConnection.dbConnection == null){
-            return new DBConnection();
-        }
-        return DBConnection.dbConnection;
-    }
-
-    public Connection getConnexion(){
-        return this.connection;
-    }
-
 
 }
