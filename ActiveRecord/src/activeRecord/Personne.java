@@ -108,7 +108,7 @@ public class Personne {
     public boolean equals(Object obj) {
         if(obj instanceof Personne){
             Personne p = (Personne)obj;
-            return this.id == p.id &&  this.nom.equals(p.nom) && this.prenom.equals(p.prenom);
+            return this.id == p.id;
         }
         return false;
     }
