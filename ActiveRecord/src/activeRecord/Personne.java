@@ -17,6 +17,11 @@ public class Personne {
         this.prenom = prenom;
     }
 
+    /**
+     * recherche toute les personnes dans la bdd
+     * @return un HashSet contenant toutes les personnes de la base de donnees
+     * @throws SQLException
+     */
     public static HashSet<Personne> findAll() throws SQLException {
         HashSet<Personne> personnes = new  HashSet<Personne>();
 
@@ -39,6 +44,12 @@ public class Personne {
         return personnes;
     }
 
+    /**
+     *
+     * @param id id de la personne a recuperer
+     * @return null si l'id n'existe pas dans la base de donnees, sinon la personne trouvee
+     * @throws SQLException
+     */
     public static Personne findById(int id) throws SQLException {
         Personne res = null;
 
