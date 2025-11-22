@@ -104,4 +104,17 @@ public class Personne {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Personne){
+            Personne p = (Personne)obj;
+            return this.id == p.id &&  this.nom.equals(p.nom) && this.prenom.equals(p.prenom);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
