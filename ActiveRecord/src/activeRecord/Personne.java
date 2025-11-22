@@ -72,6 +72,34 @@ public class Personne {
         return res;
     }
 
+    /**
+     *
+     * @param nom nom des personnes recherchees
+     * @return un hashSet de personnes qui ont le nom demandee
+     * @throws SQLException
+     */
+    public static HashSet<Personne> findByName(String nom) throws SQLException {
+        HashSet<Personne> personnes = new  HashSet<Personne>();
+        Connection connect = DBConnection.getInstance().getConnexion();
+
+        String SQLPrep = "SELECT * FROM Personne WHERE nom=?;";
+        PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
+        prep1.setString(1, nom);
+        prep1.execute();
+        ResultSet rs = prep1.getResultSet();
+        // s'il y a un resultat
+        if (rs.next()) {
+            int id = rs.getInt("id");
+            String prenom = rs.getString("prenom");
+
+            Personne p = new Personne(nom,prenom);
+            p.setId(id);
+            personnes.add(p);
+        }
+
+        return personnes;
+    }
+
     private void setId(int id) {
         this.id = id;
     }
