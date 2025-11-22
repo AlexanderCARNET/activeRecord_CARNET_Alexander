@@ -3,6 +3,7 @@ package activeRecord;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 class DBConnectionTest {
@@ -34,5 +35,20 @@ class DBConnectionTest {
         DBConnection instance = DBConnection.getInstance();
         Connection connection = instance.getConnexion();
         assertInstanceOf(java.sql.Connection.class,connection);
+    }
+
+    @Test
+    /**
+     * Test que le changement de nom de base données fonctionne correctement
+     */
+    public void test_changement_BD() throws SQLException {
+        DBConnection instance = DBConnection.getInstance();
+        instance.setNomDB("dbtestqdev");
+        Connection connection = instance.getConnexion();
+
+        String nomBDConnexion = connection.getCatalog();
+
+        assertEquals("dbtestqdev", nomBDConnexion,"connexion a la mauvaise base de données");
+
     }
 }
