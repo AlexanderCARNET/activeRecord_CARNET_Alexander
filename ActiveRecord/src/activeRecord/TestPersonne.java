@@ -30,4 +30,20 @@ class TestPersonne {
         assertTrue(personnes.contains(p4));
     }
 
+    @Test
+    public void test_findById_OK() throws SQLException {
+        Personne p1 = new Personne("Spielberg","Steven");
+        p1.setId(1);
+
+        Personne p = Personne.findById(1);
+
+        assertEquals(p1,p);
+    }
+
+    @Test
+    public void test_findById_ID_non_existant() throws SQLException {
+        Personne p = Personne.findById(8);
+        assertNull(p);
+    }
+
 }
