@@ -24,6 +24,10 @@ class TestPersonne {
         p4.save();
     }
 
+    @AfterEach
+    void tearDown() throws SQLException {
+        Personne.deleteTable();
+    }
 
     @Test
     public void test_findAll_OK() throws SQLException {
