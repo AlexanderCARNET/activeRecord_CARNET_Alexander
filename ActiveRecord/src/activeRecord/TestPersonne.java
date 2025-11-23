@@ -1,5 +1,7 @@
 package activeRecord;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -8,6 +10,20 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestPersonne {
+
+    @BeforeEach
+    void setUp() throws SQLException {
+        Personne.createTable();
+        Personne p1 = new Personne("Spielberg","Steven");
+        Personne p2 = new Personne("Scott","Ridley");
+        Personne p3 = new Personne("Kubrick","Stanley");
+        Personne p4 = new Personne("Fincher","David");
+        p1.save();
+        p2.save();
+        p3.save();
+        p4.save();
+    }
+
 
     @Test
     public void test_findAll_OK() throws SQLException {
