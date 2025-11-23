@@ -116,7 +116,9 @@ public class Personne {
     }
 
     public static void createTable() throws SQLException {
+        DBConnection.getInstance().setNomDB("dbtestqdev");
         Connection connect = DBConnection.getInstance().getConnexion();
+
 
         String createString = "CREATE TABLE Personne ( "
                 + "ID INTEGER  AUTO_INCREMENT, " + "NOM varchar(40) NOT NULL, "
@@ -126,7 +128,9 @@ public class Personne {
     }
 
     public static void deleteTable() throws SQLException {
+        DBConnection.getInstance().setNomDB("dbtestqdev");
         Connection connect = DBConnection.getInstance().getConnexion();
+
 
         String drop = "DROP TABLE Personne";
         Statement stmt = connect.createStatement();
