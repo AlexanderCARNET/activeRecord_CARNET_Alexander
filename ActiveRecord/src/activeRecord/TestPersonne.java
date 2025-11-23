@@ -88,4 +88,25 @@ class TestPersonne {
         assertNull(res,"Ce tuple aurait du etre supprime de la bdd");
     }
 
+    @Test
+    public void test_save_non_existant() throws SQLException {
+        Personne p1 = new Personne("car","alex");
+
+        p1.save();
+        Personne res = Personne.findById(5);
+
+        assertEquals(p1,res, "enregistrement echoué");
+    }
+
+    @Test
+    public void test_save_deja_existant() throws SQLException {
+        Personne p1 = new Personne("car","alex");
+        p1.setId(1);
+
+        p1.save();
+        Personne res = Personne.findById(1);
+
+        assertEquals(p1,res, "mise a jour de la personne dans la bdd a échoué");
+    }
+
 }
