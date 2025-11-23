@@ -76,4 +76,16 @@ class TestPersonne {
         assertTrue(personnes.contains(p1));
     }
 
+    @Test
+    public void test_delete_OK() throws SQLException {
+        Personne p1 = new Personne("Spielberg","Steven");
+        p1.setId(1);
+
+        p1.delete();
+
+        assertEquals(-1, p1.getId(),"id non mis a jour dans l'instance Personne supprimé");
+        Personne res = Personne.findById(1);
+        assertNull(res,"Ce tuple aurait du etre supprime de la bdd");
+    }
+
 }
