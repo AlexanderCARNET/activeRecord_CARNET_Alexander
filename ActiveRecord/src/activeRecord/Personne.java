@@ -191,4 +191,16 @@ public class Personne {
         prep1.setInt(3, this.id);
         prep1.execute();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
 }
