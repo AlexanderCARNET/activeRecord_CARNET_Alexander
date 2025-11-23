@@ -132,4 +132,16 @@ public class Personne {
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(drop);
     }
+
+    public void delete() throws SQLException {
+
+        if(this.id != -1){
+            Connection connect = DBConnection.getInstance().getConnexion();
+
+            PreparedStatement prep = connect.prepareStatement("DELETE FROM Personne WHERE id=?");
+            prep.setInt(1, this.id);
+            prep.execute();
+            this.id = -1;
+        }
+    }
 }
