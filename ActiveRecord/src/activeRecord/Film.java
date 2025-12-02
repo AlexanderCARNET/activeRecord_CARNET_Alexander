@@ -1,5 +1,8 @@
 package activeRecord;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Film {
@@ -20,5 +23,26 @@ public class Film {
         this.titre = titre;
         this.id = id;
         this.id_real = id_real;
+    }
+
+    public static Film findById(int id) throws SQLException {
+        Film res = null;
+
+        //recuperation de la connexion a la bdd
+        Connection connect = DBConnection.getInstance().getConnexion();
+
+        String SQLPrep = "SELECT * FROM Film WHERE id=?;";
+        PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
+        prep1.setInt(1, id);
+        prep1.execute();
+        ResultSet rs = prep1.getResultSet();
+        // s'il y a un resultat
+        if (rs.next()) {
+            String titre = rs.getString("titre");
+            int id_rea = Integer.parseInt(rs.getString("id_rea"));
+
+            res = new Film(titre,id,id_rea);
+        }
+        return res;
     }
 }
