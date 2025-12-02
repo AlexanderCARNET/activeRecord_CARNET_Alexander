@@ -15,4 +15,10 @@ public class Film {
         }
         this.id_real = p.getId();
     }
+
+    private Film(String titre, int id, int id_real){
+        this.titre = titre;
+        this.id = id;
+        this.id_real = id_real;
+    }
 }
