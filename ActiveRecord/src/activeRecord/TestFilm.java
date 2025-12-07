@@ -92,6 +92,20 @@ class TestFilm {
         assertNull(res,"Ce tuple aurait du etre supprime de la bdd");
     }
 
+    @Test
+    public void test_findById_present_bdd() throws SQLException {
 
+        Film f = Film.findById(2);
+
+        assertEquals(2,f.getId());
+    }
+
+    @Test
+    public void test_findById_innexistant_bdd() throws SQLException {
+
+        Film f = Film.findById(19);
+
+        assertNull(f);
+    }
 
 }
