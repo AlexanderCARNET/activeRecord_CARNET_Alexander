@@ -1,6 +1,8 @@
 package activeRecord;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Film {
     private String titre;
@@ -134,5 +136,22 @@ public class Film {
         this.id = autoInc;
     }
 
+    public static List<Film> findByRealisateur(Personne p) throws SQLException {
+        ArrayList<Film> films = new ArrayList<Film>();
 
+        Connection connect = DBConnection.getInstance().getConnexion();
+        PreparedStatement ps = connect.prepareStatement("select id, titre from film where id_rea = ?");
+        ps.setInt(1, p.getId());
+        ps.execute();
+
+        ResultSet rs = ps.getResultSet();
+
+        while(rs.next()){
+            int film_id = rs.getInt("id");
+            String titre = rs.getString("titre");
+            Film f = new Film(titre,film_id,p.getId());
+            films.add(f);
+        }
+        return films;
+    }
 }
