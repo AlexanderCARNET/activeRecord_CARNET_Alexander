@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestFilm {
+
+    private Film[] films = new Film [7];
+
     @BeforeEach
     void setUp() throws SQLException {
         Personne.createTable();
@@ -24,7 +27,6 @@ class TestFilm {
         p3.save();
         p4.save();
 
-        Film[] films = new Film [7];
 
         films[0] = new Film("Arche perdue", p1);
         films[1] = new Film("Alien", p2);
@@ -106,6 +108,13 @@ class TestFilm {
         Film f = Film.findById(19);
 
         assertNull(f);
+    }
+
+    @Test
+    public void test_getRealisateur_OK() throws SQLException {
+        Personne p = films[0].getRealisateur();
+
+        assertEquals(1, p.getId());
     }
 
 }
