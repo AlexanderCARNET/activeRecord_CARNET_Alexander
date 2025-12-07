@@ -1,7 +1,9 @@
 package activeRecord;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Personne {
     private int id;
@@ -19,8 +21,8 @@ public class Personne {
      * @return un HashSet contenant toutes les personnes de la base de donnees
      * @throws SQLException
      */
-    public static HashSet<Personne> findAll() throws SQLException {
-        HashSet<Personne> personnes = new  HashSet<Personne>();
+    public static ArrayList<Personne> findAll() throws SQLException {
+        ArrayList<Personne> personnes = new ArrayList<Personne>();
 
         //recuperation de la connexion a la bdd
         Connection connect = DBConnection.getInstance().getConnexion();
@@ -75,8 +77,8 @@ public class Personne {
      * @return un hashSet de personnes qui ont le nom demandee
      * @throws SQLException
      */
-    public static HashSet<Personne> findByName(String nom) throws SQLException {
-        HashSet<Personne> personnes = new  HashSet<Personne>();
+    public static ArrayList<Personne> findByName(String nom) throws SQLException {
+        ArrayList<Personne> personnes = new  ArrayList<Personne>();
         Connection connect = DBConnection.getInstance().getConnexion();
 
         String SQLPrep = "SELECT * FROM personne WHERE nom=?;";
@@ -203,5 +205,13 @@ public class Personne {
 
     public String getPrenom() {
         return prenom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 }

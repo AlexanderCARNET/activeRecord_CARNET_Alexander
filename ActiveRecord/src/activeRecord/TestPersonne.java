@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +42,7 @@ class TestPersonne {
         Personne p4 = new Personne("Fincher","David");
         p4.setId(4);
 
-        HashSet<Personne> personnes = Personne.findAll();
+        List<Personne> personnes = Personne.findAll();
 
         assertEquals(4,personnes.size(), "Pas le bon nombre de personnes");
 
@@ -71,7 +73,7 @@ class TestPersonne {
         Personne p1 = new Personne("Spielberg","Steven");
         p1.setId(1);
 
-        HashSet<Personne> personnes = Personne.findByName("Spielberg");
+        ArrayList<Personne> personnes = Personne.findByName("Spielberg");
         assertEquals(1,personnes.size(), "Pas le bon nombre de personnes");
         assertTrue(personnes.contains(p1));
     }
