@@ -167,4 +167,13 @@ public class Film {
     public int getId_real() {
         return id_real;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Film){
+            Film f = (Film) obj;
+            return this.id == f.id;
+        }
+        return false;
+    }
 }
