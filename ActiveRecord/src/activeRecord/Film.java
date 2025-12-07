@@ -176,4 +176,8 @@ public class Film {
         }
         return false;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
