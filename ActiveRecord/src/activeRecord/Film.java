@@ -49,6 +49,9 @@ public class Film {
     }
 
     public static void createTable() throws SQLException {
+
+        Personne.createTable();
+
         DBConnection.getInstance().setNomDB("testpersonne");
         Connection connect = DBConnection.getInstance().getConnexion();
 

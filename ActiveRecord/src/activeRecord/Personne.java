@@ -116,7 +116,7 @@ public class Personne {
     }
 
     public static void createTable() throws SQLException {
-        DBConnection.getInstance().setNomDB("dbtestqdev");
+        DBConnection.getInstance().setNomDB("testpersonne");
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
@@ -128,7 +128,10 @@ public class Personne {
     }
 
     public static void deleteTable() throws SQLException {
-        DBConnection.getInstance().setNomDB("dbtestqdev");
+
+        Film.deleteTable();
+
+        DBConnection.getInstance().setNomDB("testPersonne");
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
