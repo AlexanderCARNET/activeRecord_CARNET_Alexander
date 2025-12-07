@@ -71,5 +71,16 @@ public class Film {
         stmt.executeUpdate(drop);
     }
 
+    public void delete() throws SQLException {
+        if(this.id != -1){
+            Connection connect = DBConnection.getInstance().getConnexion();
+
+            PreparedStatement prep = connect.prepareStatement("DELETE FROM film WHERE id=?");
+            prep.setInt(1, this.id);
+            prep.execute();
+            this.id = -1;
+        }
+    }
+
 
 }
