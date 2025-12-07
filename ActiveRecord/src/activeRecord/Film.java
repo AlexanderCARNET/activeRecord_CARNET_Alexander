@@ -137,7 +137,12 @@ public class Film {
     }
 
     public static List<Film> findByRealisateur(Personne p) throws SQLException {
+
         ArrayList<Film> films = new ArrayList<Film>();
+
+        if(p == null)return films;
+
+        if(p.getId() == -1)throw new RealisateurAbsentException("pas de realisateur");
 
         Connection connect = DBConnection.getInstance().getConnexion();
         PreparedStatement ps = connect.prepareStatement("select id, titre from film where id_rea = ?");
