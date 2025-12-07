@@ -85,7 +85,7 @@ public class Film {
     }
 
     public void save() throws SQLException {
-        if(this.id != -1){
+        if(this.id_real != -1){
             if(this.id == -1){
                 this.saveNew();
             }else{
@@ -98,7 +98,7 @@ public class Film {
     }
 
     private void update() throws SQLException {
-        if(this.id_real != -1)throw new RealisateurAbsentException("pas de realisateur");
+        if(this.id_real == -1)throw new RealisateurAbsentException("pas de realisateur");
 
         Connection connect = DBConnection.getInstance().getConnexion();
 
@@ -112,7 +112,7 @@ public class Film {
     }
 
     private void saveNew() throws SQLException {
-        if(this.id_real != -1)throw new RealisateurAbsentException("pas de realisateur");
+        if(this.id_real == -1)throw new RealisateurAbsentException("pas de realisateur");
 
         Connection connect = DBConnection.getInstance().getConnexion();
 
