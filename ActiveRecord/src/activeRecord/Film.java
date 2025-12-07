@@ -82,5 +82,57 @@ public class Film {
         }
     }
 
+    public void save() throws SQLException {
+        if(this.id != -1){
+            if(this.id == -1){
+                this.saveNew();
+            }else{
+                this.update();
+            }
+        }else{
+            throw new RealisateurAbsentException("pas de réalisateur");
+        }
+
+    }
+
+    private void update() throws SQLException {
+        if(this.id_real != -1)throw new RealisateurAbsentException("pas de realisateur");
+
+        Connection connect = DBConnection.getInstance().getConnexion();
+
+        // met a jour un film
+        String SQLprep = "update film set titre=?, id_rea=? where id=?;";
+        PreparedStatement prep1 = connect.prepareStatement(SQLprep);
+        prep1.setString(1, this.titre);
+        prep1.setInt(2, this.id_real);
+        prep1.setInt(3, this.id);
+        prep1.execute();
+    }
+
+    private void saveNew() throws SQLException {
+        if(this.id_real != -1)throw new RealisateurAbsentException("pas de realisateur");
+
+        Connection connect = DBConnection.getInstance().getConnexion();
+
+        // ajout de personne avec requete preparee
+        String SQLPrep = "INSERT INTO film (titre, id_rea) VALUES (?,?);";
+        PreparedStatement prep;
+        //l'option RETURN_GENERATED_KEYS permet de recuperer l'id
+        prep = connect.prepareStatement(SQLPrep,
+                Statement.RETURN_GENERATED_KEYS);
+        prep.setString(1, this.titre);
+        prep.setInt(2, this.id_real);
+        prep.executeUpdate();
+
+        // recuperation de la derniere ligne ajoutée (auto increment)
+        // recupere le nouvel id
+        int autoInc = -1;
+        ResultSet rs = prep.getGeneratedKeys();
+        if (rs.next()) {
+            autoInc = rs.getInt(1);
+        }
+        this.id = autoInc;
+    }
+
 
 }

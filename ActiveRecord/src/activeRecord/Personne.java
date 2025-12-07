@@ -184,7 +184,7 @@ public class Personne {
     private void update() throws SQLException {
         Connection connect = DBConnection.getInstance().getConnexion();
 
-        // met a jour personne 2
+        // met a jour personne
         String SQLprep = "update personne set nom=?, prenom=? where id=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLprep);
         prep1.setString(1, this.nom);
