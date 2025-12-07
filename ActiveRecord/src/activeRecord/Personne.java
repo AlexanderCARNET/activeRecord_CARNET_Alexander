@@ -129,8 +129,6 @@ public class Personne {
 
     public static void deleteTable() throws SQLException {
 
-        Film.deleteTable();
-
         DBConnection.getInstance().setNomDB("testpersonne");
         Connection connect = DBConnection.getInstance().getConnexion();
 
