@@ -2,8 +2,11 @@ package activeRecord;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestFilm {
     @BeforeEach
@@ -16,6 +19,11 @@ class TestFilm {
         Personne p3 = new Personne("Kubrick","Stanley");
         Personne p4 = new Personne("Fincher","David");
 
+        p1.save();
+        p2.save();
+        p3.save();
+        p4.save();
+
         Film[] films = new Film [7];
 
         films[0] = new Film("Arche perdue", p1);
@@ -26,11 +34,6 @@ class TestFilm {
         films[5] = new Film("Fight Club", p4);
         films[6] = new Film("Orange Mecanique", p3);
 
-
-        p1.save();
-        p2.save();
-        p3.save();
-        p4.save();
 
         for(Film f : films) {
             f.save();
@@ -43,4 +46,38 @@ class TestFilm {
         Film.deleteTable();
         Personne.deleteTable();
     }
+
+    @Test
+    public void test_save_newSave() throws SQLException {
+        Film f = new Film("nouveau",Personne.findById(1));
+
+        f.save();
+
+        assertEquals(8, f.getId(),"enregistrement echoué");
+    }
+
+    @Test
+    public void test_save_update() throws SQLException {
+        Film f = new Film("nouveau",Personne.findById(1));
+        f.setId(1);
+
+        f.save();
+
+        Film filmSave = Film.findById(1);
+
+        assertEquals(filmSave.getId(),f.getId(),"enregistrement echou");
+        assertEquals("nouveau",filmSave.getTitre());
+    }
+    @Test
+    public void test_save_personne_nonSave() throws SQLException {
+        Personne p = new Personne("car","alex");
+        Film f = new Film("testTitre", p);
+
+        f.save();
+
+        assertEquals(8,f.getId(),"enregistrement echou du film");
+        assertEquals(5,p.getId(),"enregistrement echou de personne");
+        assertEquals(5,f.getId_real(), "mauvais id_rea enregistré");
+    }
+
 }
