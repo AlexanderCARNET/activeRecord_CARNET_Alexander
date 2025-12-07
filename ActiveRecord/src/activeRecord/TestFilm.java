@@ -5,19 +5,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestFilm {
 
     private Film[] films = new Film [7];
+    Personne p1;
 
     @BeforeEach
     void setUp() throws SQLException {
         Personne.createTable();
         Film.createTable();
 
-        Personne p1 = new Personne("Spielberg","Steven");
+        p1 = new Personne("Spielberg","Steven");
         Personne p2 = new Personne("Scott","Ridley");
         Personne p3 = new Personne("Kubrick","Stanley");
         Personne p4 = new Personne("Fincher","David");
@@ -115,6 +117,30 @@ class TestFilm {
         Personne p = films[0].getRealisateur();
 
         assertEquals(1, p.getId());
+    }
+
+
+    @Test
+    public void test_findByRealisateur_OK() throws SQLException {
+        List<Film> res = Film.findByRealisateur(p1);
+
+        assertEquals(2, res.size());
+    }
+
+    @Test
+    public void test_findByRealisateur_realisateur_sans_id() throws SQLException {
+        Personne p = new Personne("Scott","Ridley");
+
+
+        assertThrows(RealisateurAbsentException.class, () -> Film.findByRealisateur(p));
+    }
+
+    @Test
+    public void test_findByRealisateur_realistateur_null() throws SQLException {
+        Personne p = null;
+        List<Film> res = Film.findByRealisateur(p);
+        assertEquals(0,res.size(), "Pas le bon nombre de films");
+
     }
 
 }
