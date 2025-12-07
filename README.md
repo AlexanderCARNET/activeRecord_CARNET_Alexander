@@ -1,3 +1,3 @@
 # activeRecord_CARNET_Alexander
 
-Le projet a été effectué seul.
+Le TP a été effectué seul.
