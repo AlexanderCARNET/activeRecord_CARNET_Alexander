@@ -154,4 +154,17 @@ public class Film {
         }
         return films;
     }
+
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getId_real() {
+        return id_real;
+    }
 }
