@@ -80,4 +80,18 @@ class TestFilm {
         assertEquals(5,f.getId_real(), "mauvais id_rea enregistré");
     }
 
+    @Test
+    public void test_delete() throws SQLException {
+        Film f = new Film("Arche perdue", new Personne("Spielberg","Steven"));
+        f.setId(1);
+
+        f.delete();
+
+        assertEquals(-1, f.getId(),"id non mis a jour dans l'instance Film supprimé");
+        Film res = Film.findById(1);
+        assertNull(res,"Ce tuple aurait du etre supprime de la bdd");
+    }
+
+
+
 }
