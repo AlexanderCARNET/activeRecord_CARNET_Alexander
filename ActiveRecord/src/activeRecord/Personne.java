@@ -25,7 +25,7 @@ public class Personne {
         //recuperation de la connexion a la bdd
         Connection connect = DBConnection.getInstance().getConnexion();
 
-        String SQLPrep = "SELECT * FROM Personne;";
+        String SQLPrep = "SELECT * FROM personne;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.execute();
         ResultSet rs = prep1.getResultSet();
@@ -53,7 +53,7 @@ public class Personne {
         //recuperation de la connexion a la bdd
         Connection connect = DBConnection.getInstance().getConnexion();
 
-        String SQLPrep = "SELECT * FROM Personne WHERE id=?;";
+        String SQLPrep = "SELECT * FROM personne WHERE id=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.setInt(1, id);
         prep1.execute();
@@ -79,7 +79,7 @@ public class Personne {
         HashSet<Personne> personnes = new  HashSet<Personne>();
         Connection connect = DBConnection.getInstance().getConnexion();
 
-        String SQLPrep = "SELECT * FROM Personne WHERE nom=?;";
+        String SQLPrep = "SELECT * FROM personne WHERE nom=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.setString(1, nom);
         prep1.execute();
@@ -120,9 +120,9 @@ public class Personne {
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
-        String createString = "CREATE TABLE Personne ( "
-                + "ID INTEGER  AUTO_INCREMENT, " + "NOM varchar(40) NOT NULL, "
-                + "PRENOM varchar(40) NOT NULL, " + "PRIMARY KEY (ID))";
+        String createString = "CREATE TABLE personne ( "
+                + "id INTEGER  AUTO_INCREMENT, " + "nom varchar(40) NOT NULL, "
+                + "prenom varchar(40) NOT NULL, " + "PRIMARY KEY (id))";
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(createString);
     }
@@ -131,11 +131,11 @@ public class Personne {
 
         Film.deleteTable();
 
-        DBConnection.getInstance().setNomDB("testPersonne");
+        DBConnection.getInstance().setNomDB("testpersonne");
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
-        String drop = "DROP TABLE Personne";
+        String drop = "DROP TABLE personne";
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(drop);
     }
@@ -145,7 +145,7 @@ public class Personne {
         if(this.id != -1){
             Connection connect = DBConnection.getInstance().getConnexion();
 
-            PreparedStatement prep = connect.prepareStatement("DELETE FROM Personne WHERE id=?");
+            PreparedStatement prep = connect.prepareStatement("DELETE FROM personne WHERE id=?");
             prep.setInt(1, this.id);
             prep.execute();
             this.id = -1;
@@ -164,7 +164,7 @@ public class Personne {
         Connection connect = DBConnection.getInstance().getConnexion();
 
         // ajout de personne avec requete preparee
-        String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
+        String SQLPrep = "INSERT INTO personne (nom, prenom) VALUES (?,?);";
         PreparedStatement prep;
         //l'option RETURN_GENERATED_KEYS permet de recuperer l'id
         prep = connect.prepareStatement(SQLPrep,
@@ -187,7 +187,7 @@ public class Personne {
         Connection connect = DBConnection.getInstance().getConnexion();
 
         // met a jour personne 2
-        String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
+        String SQLprep = "update personne set nom=?, prenom=? where id=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLprep);
         prep1.setString(1, this.nom);
         prep1.setString(2, this.prenom);

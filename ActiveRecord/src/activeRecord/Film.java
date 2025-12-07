@@ -28,7 +28,7 @@ public class Film {
         //recuperation de la connexion a la bdd
         Connection connect = DBConnection.getInstance().getConnexion();
 
-        String SQLPrep = "SELECT * FROM Film WHERE id=?;";
+        String SQLPrep = "SELECT * FROM film WHERE id=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.setInt(1, id);
         prep1.execute();
@@ -56,9 +56,9 @@ public class Film {
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
-        String createString = "CREATE TABLE Film ( "
-                + "ID INTEGER  AUTO_INCREMENT NOT NULL, " + "TITRE varchar(40) NOT NULL, "
-                + "ID_REA int(11) DEFAULT NULL, " + "PRIMARY KEY (ID), FOREIGN KEY (ID_REA) REFERENCES Personne(ID))";
+        String createString = "CREATE TABLE film ( "
+                + "id INTEGER  AUTO_INCREMENT NOT NULL, " + "titre varchar(40) NOT NULL, "
+                + "id_rea int(11) DEFAULT NULL, " + "PRIMARY KEY (id), FOREIGN KEY (id_rea) REFERENCES Personne(id))";
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(createString);
     }
@@ -68,7 +68,7 @@ public class Film {
         Connection connect = DBConnection.getInstance().getConnexion();
 
 
-        String drop = "DROP TABLE Film";
+        String drop = "DROP TABLE film";
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(drop);
     }
